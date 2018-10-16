@@ -3,4 +3,7 @@ from django.http  import HttpResponse
 
 
 def index(request):
-    return HttpResponse('Hood watchers!')
+    """
+    Renders the index page
+    """
+    return render(request, 'index.html')
