@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from .forms import SignupForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -19,7 +20,7 @@ def signup(request):
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your blog account.'
-            message = render_to_string('acc_active_email.html', {
+            message = render_to_string('registration/acc_active_email.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid':urlsafe_base64_encode(force_bytes(user.pk)),
@@ -50,6 +51,7 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')
 
+@login_required(login_url='/accounts/login/')
 def index(request):
     """
     Renders the index page

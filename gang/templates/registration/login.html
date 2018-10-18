@@ -10,7 +10,7 @@
     <p class="small">Password or Username is incorrect</p>
     {% endif %}
     <div class="well">
-        <h1>>Hoodwatch</h1>
+        <h1>Hoodwatch</h1>
         <div class="form-section" id="login">
             <form action="/accounts/login/" method="POST">
                 {% csrf_token %}
@@ -19,7 +19,7 @@
               
           <center>
                     <input type="submit" class="btn btn-info btn-md" value="Log in">
-                      <p>Don't have an account? <a href="/accounts/register/">Sign-Up</a></p>
+                      <p>Don't have an account? <a href="/signup">Sign-Up</a></p>
                  </center>
                 <input type="hidden" name="next" value="/">
             </form>
