@@ -1,0 +1,31 @@
+{% extends 'registration/base.html' %}
+{% load bootstrap3 %}
+
+
+{% block content %}
+<div class="body">
+
+
+    {% if form.errors %}
+    <p class="small">Password or Username is incorrect</p>
+    {% endif %}
+    <div class="well">
+        <h1>>Hoodwatch</h1>
+        <div class="form-section" id="login">
+            <form action="/accounts/login/" method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+            
+              
+          <center>
+                    <input type="submit" class="btn btn-info btn-md" value="Log in">
+                      <p>Don't have an account? <a href="/accounts/register/">Sign-Up</a></p>
+                 </center>
+                <input type="hidden" name="next" value="/">
+            </form>
+            
+        </div>
+    </div>
+  
+</div>
+{% endblock %}
