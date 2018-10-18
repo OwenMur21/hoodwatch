@@ -34,7 +34,7 @@ class Profile(models.Model):
     """
     Class that contains Profile details
     """
-    name = models.TextField()
+    name = models.CharField(max_length = 30)
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     hood = models.ForeignKey(Neighbour)
 
@@ -69,8 +69,8 @@ class Business(models.Model):
     """
     Class that contains Business details
     """
-    name = models.TextField()
-    email = models.TextField()
+    name = models.CharField(max_length = 30)
+    email = models.CharField(max_length = 30)
     user = models.ForeignKey(User)
     hood = models.ForeignKey(Neighbour)
 
