@@ -14,6 +14,10 @@ class Neighbour(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
+
+    def __str__(self):
+                return self.name
+
     def save_hood(self):
         self.save()
 
@@ -45,6 +49,9 @@ class Profile(models.Model):
 
     post_save.connect(save_user_profile, sender=User)
 
+    def __str__(self):
+        return self.name
+
     def save_profile(self):
         self.save()
 
@@ -56,6 +63,33 @@ class Profile(models.Model):
             profile = Profile.objects.filter(hood_id=id).all()
             return profile
 
+
+   
+class Business(models.Model):
+    """
+    Class that contains Business details
+    """
+    name = models.TextField()
+    email = models.TextField()
+    user = models.ForeignKey(User)
+    hood = models.ForeignKey(Neighbour)
+
+    def __str__(self):
+        return self.name
+        
+    def save_biz(self):
+        self.save()
+
+    def delete_biz(self):
+        self.delete()
+
+    @classmethod
+    def get_by_id(cls, id):
+            biz = Business.objects.get(id=id)
+            return biz
+
+
+ 
 
 
 
