@@ -13,16 +13,36 @@ class Neighbour(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
-    def create_neigborhood(self):
+    def save_hood(self):
         self.save()
 
-    def delete_neigborhood(self):
+    def delete_hood(self):
         self.delete()
 
     @classmethod
-    def get_hood_by_id(cls, id):
+    def get_by_id(cls, id):
             hood = Neighbour.objects.get(id=id)
             return hood
+
+
+# class Profile(models.Model):
+#     """
+#     Class that contains Profile details
+#     """
+#     name = models.TextField()
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+#     hood = models.ForeignKey(Neighbour, on_delete=models.CASCADE)
+
+#     @receiver(post_save, sender=User)
+#     def create_user_profile(sender, instance, created, **kwargs):
+#         if created:
+#             Profile.objects.create(user=instance)
+
+#     @receiver(post_save, sender=User)
+#     def save_user_profile(sender, instance, **kwargs):
+#         instance.profile.save()
+
+#     post_save.connect(save_user_profile, sender=User)
 
     
 
