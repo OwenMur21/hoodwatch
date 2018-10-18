@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Neighbour
+from .models import Neighbour, Profile
 from django.contrib.auth.models import User
 
 
@@ -49,17 +49,43 @@ class HoodTestClass(TestCase):
         hood = Neighbour.objects.get(id=self.hood.id)
         self.assertTrue(this_hood, hood)
 
-# class ProfileTestClass(TestCase):
-#     """
-#     Test profile class and its functions
-#     """
-#     def setUp(self):
-#         self.user = User.objects.create(id =1,username='a')
-#         self.hood = Neighbour(name='mtaani', location='huko tu', user=self.user)
-#         self.hood.create_neigborhood()
-#         self.pro = Profile(name="Mimi", user=self.user, hood = self.hood)
+class ProfileTestClass(TestCase):
+    """
+    Test profile class and its functions
+    """
+    def setUp(self):
+        self.user = User.objects.create(id =1,username='a')
+        self.hood = Neighbour(name='mtaani', location='huko tu', user=self.user)
+        self.hood.save_hood()
+        self.pro = Profile(name="Mimi", user=self.user, hood = self.hood)
 
-#     def test_instance(self):
-#         self.assertTrue(isinstance(self.pro, Profile))
+    def test_instance(self):
+        self.assertTrue(isinstance(self.pro, Profile))
+
+
+    def test_save_method(self):
+        """
+        Function to test that profile is being saved
+        """
+        self.pro.save_profile()
+        profiles = Profile.objects.all()
+        self.assertTrue(len(profiles) > 0)
+
+    def test_delete_method(self):
+        """
+        Function to test that a profile can be deleted
+        """
+        self.pro.save_profile()
+        self.pro.del_profile()
+
+    def test_update_method(self):
+        """
+        Function to test that a profile's details can be updated
+        """
+        self.pro.save_profile()
+        new_profile = Profile.objects.filter(name='Mimi').update(name='Me')
+        profiles = Profile.objects.get(name='Me')
+        self.assertTrue(profiles.name, 'Me')
+
 
   

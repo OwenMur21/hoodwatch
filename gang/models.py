@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+
 class Neighbour(models.Model):
     """
     Class that defines neighbourhood details
@@ -24,25 +25,39 @@ class Neighbour(models.Model):
             hood = Neighbour.objects.get(id=id)
             return hood
 
+    
+class Profile(models.Model):
+    """
+    Class that contains Profile details
+    """
+    name = models.TextField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    hood = models.ForeignKey(Neighbour)
 
-# class Profile(models.Model):
-#     """
-#     Class that contains Profile details
-#     """
-#     name = models.TextField()
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-#     hood = models.ForeignKey(Neighbour, on_delete=models.CASCADE)
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
 
-#     @receiver(post_save, sender=User)
-#     def create_user_profile(sender, instance, created, **kwargs):
-#         if created:
-#             Profile.objects.create(user=instance)
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
 
-#     @receiver(post_save, sender=User)
-#     def save_user_profile(sender, instance, **kwargs):
-#         instance.profile.save()
+    post_save.connect(save_user_profile, sender=User)
 
-#     post_save.connect(save_user_profile, sender=User)
+    def save_profile(self):
+        self.save()
+
+    def del_profile(self):
+        self.delete()
+
+    @classmethod
+    def get_user_by_hood(cls, id):
+            profile = Profile.objects.filter(hood_id=id).all()
+            return profile
+
+
+
 
     
 
