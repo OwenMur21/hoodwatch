@@ -76,7 +76,7 @@ class Business(models.Model):
 
     def __str__(self):
         return self.name
-        
+
     def save_biz(self):
         self.save()
 
@@ -84,7 +84,7 @@ class Business(models.Model):
         self.delete()
 
     @classmethod
-    def get_by_id(cls, id):
+    def get_by_bizid(cls, id):
             biz = Business.objects.get(id=id)
             return biz
 

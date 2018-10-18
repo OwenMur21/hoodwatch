@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Neighbour, Profile
+from .models import Neighbour, Profile, Business
 from django.contrib.auth.models import User
 
 
@@ -86,6 +86,82 @@ class ProfileTestClass(TestCase):
         new_profile = Profile.objects.filter(name='Mimi').update(name='Me')
         profiles = Profile.objects.get(name='Me')
         self.assertTrue(profiles.name, 'Me')
+
+
+class BusinessTestClass(TestCase):
+    """
+    Test business class and its functions
+    """
+    def setUp(self):
+        self.user = User.objects.create(id =1, username='a')
+        self.hood = Neighbour(name='mtaani', location='huko tu', user=self.user)
+        self.hood.save_hood()
+        self.biz = Business(name="bizna", email="kokoko@gmail.com", user=self.user, hood=self.hood)
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.biz, Business))
+
+    
+    def test_save_method(self):
+        """
+        Function to test that neighbourhood is being saved
+        """
+        self.biz.save_biz()
+        bizes = Business.objects.all()
+        self.assertTrue(len(bizes) > 0)
+
+    def test_delete_method(self):
+        """
+        Function to test that a neighbourhood can be deleted
+        """
+        self.biz.save_biz()
+        self.biz.delete_biz()
+
+    def test_update_method(self):
+        """
+        Function to test that a neighbourhood's details can be updated
+        """
+        self.biz.save_biz()
+        new_biz = Business.objects.filter(name='bizna').update(name='biznas')
+        bizes = Business.objects.get(name='biznas')
+        self.assertTrue(bizes.name, 'biznas')
+
+
+    def test_get_by_id(self):
+        """
+        Function to test if you can get a hood by its id
+        """
+        self.biz.save_biz()
+        this_biz= self.biz.get_by_bizid(self.biz.id)
+        biz = Business.objects.get(id=self.biz.id)
+        self.assertTrue(this_biz, biz)
+
+
+        
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   
