@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import SignupForm, CreateHoodForm
 from django.contrib.sites.shortcuts import get_current_site
@@ -102,6 +103,27 @@ def delhood(request , id):
     """
     Neighbour.objects.filter(pk = id).delete()
     return redirect('landing')
+
+@login_required(login_url='/accounts/login/')
+def join(request , id):
+    """
+    This view edits neighbour class
+    """
+    neighbour = Neighbour.objects.get(pk = id)
+    if Join.objects.filter(user_id = request.user).exists():
+        Join.objects.filter(user_id = request.user).update(hood_id = neighbour)
+    else:
+        Join(user_id=request.user,hood_id = neighbour).save()
+    messages.success(request, 'Success! You have succesfully joined this Neighbourhood ')
+    return redirect('landing')
+    
+    
+    
+   
+
+      
+        
+  
 
 
         

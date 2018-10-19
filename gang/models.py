@@ -108,9 +108,9 @@ class Business(models.Model):
 
 
 class Join(models.Model):
-	'''
+	"""
 	Class that monitors users who join hoods
-	'''
+	"""
 	user = models.OneToOneField(User)
 	hood = models.ForeignKey(Neighbour)
 
