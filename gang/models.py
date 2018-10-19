@@ -107,9 +107,16 @@ class Business(models.Model):
             return biz
 
 
+class Join(models.Model):
+	'''
+	Class that monitors users who join hoods
+	'''
+	user = models.OneToOneField(User)
+	hood = models.ForeignKey(Neighbour)
 
-
- 
+	def __str__(self):
+            return self.user
+  
 
 
 

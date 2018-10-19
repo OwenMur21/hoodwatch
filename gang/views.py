@@ -10,7 +10,7 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
-from .models import Neighbour, Profile
+from .models import Neighbour, Profile, Join
 
 def signup(request):
     if request.method == 'POST':
