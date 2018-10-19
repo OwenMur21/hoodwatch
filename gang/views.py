@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import SignupForm, CreateHoodForm
+from .forms import SignupForm, CreateHoodForm, CreateBizForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -116,6 +116,31 @@ def join(request , id):
         Join(user_id=request.user,hood_id = neighbour).save()
     messages.success(request, 'Success! You have succesfully joined this Neighbourhood ')
     return redirect('landing')
+
+
+
+@login_required(login_url='/accounts/login/')
+def createbiz(request):
+	"""
+	Creates business class
+	"""
+	if Join.objects.filter(user_id = request.user).exists():
+		if request.method == 'POST':
+			form = CreateBizForm(request.POST)
+			if form.is_valid():
+				business = form.save(commit = False)
+				business.user = request.user
+				business.hood = request.user.join.hood_id
+				business.save()
+				messages.success(request, 'Success! You have created a business')
+				return redirect('allBusinesses')
+		else:
+			form = CreateBizForm()
+			return render(request, 'forms/biz.html',{"form":form})
+				
+	else:
+		messages.error(request, 'Error! Join a Neighbourhood to create a Business')
+      
     
     
     

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Neighbour
+from .models import Neighbour, Business
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required')
@@ -17,3 +17,12 @@ class CreateHoodForm(forms.ModelForm):
     class Meta:
         model = Neighbour
         exclude =['user'] 
+
+
+class CreateBizForm(forms.ModelForm):
+    """
+    Model form class to create a neighbourhood
+    """
+    class Meta:
+        model = Business
+        exclude =['user','hood'] 
