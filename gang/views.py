@@ -94,6 +94,16 @@ def edithood(request , id):
         form = CreateHoodForm(instance = neighbour)
     return render(request, 'edit/hood.html', locals())
 
+
+@login_required(login_url='/accounts/login/')
+def delhood(request , id):
+    """
+    View function that deleted a hood
+    """
+    Neighbour.objects.filter(pk = id).delete()
+    return redirect('landing')
+
+
         
 
 
