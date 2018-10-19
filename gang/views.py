@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from .models import Neighbour, Profile
 
 def signup(request):
     if request.method == 'POST':
@@ -74,6 +75,25 @@ def createhood(request):
     else:
         form = CreateHoodForm()
         return render(request, 'forms/hood.html', {"form":form})
+
+
+@login_required(login_url='/accounts/login/')
+def edithood(request , id):
+    """
+    This view edits neighbour class
+    """
+    neighbour = Neighbour.objects.get(pk = id)
+    if request.method == 'POST':
+        form = CreateHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.user = request.user
+            hood.save()
+        return redirect('landing')
+    else:
+        form = CreateHoodForm()
+    return render(request, 'edit/hood.html', locals())
+
         
 
 
