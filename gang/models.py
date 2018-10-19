@@ -10,7 +10,19 @@ class Neighbour(models.Model):
     Class that defines neighbourhood details
     """
     name = models.CharField(max_length = 30)
-    location = models.CharField(max_length = 30)
+    loc = (
+    ('Westlands', 'Westlands'),
+    ('South b', 'South b'),
+    ('South c', 'South c'),
+    ('Langata', 'Langata'),
+    ('Satelite', 'Satelite'),
+    ('Buruburu', 'Buruburu'),
+    ('Kinoo', 'Kinoo'),
+    ('Donholm', 'Donholm'),
+    ('Karen', 'Karen')
+)
+    description = models.TextField(default="My hood is cool")
+    location = models.CharField(max_length = 30, choices=loc)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
@@ -70,6 +82,7 @@ class Business(models.Model):
     Class that contains Business details
     """
     name = models.CharField(max_length = 30)
+    description = models.TextField(default="Check out my business")
     email = models.CharField(max_length = 30)
     user = models.ForeignKey(User)
     hood = models.ForeignKey(Neighbour)
