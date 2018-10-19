@@ -118,33 +118,27 @@ def join(request , id):
     return redirect('landing')
 
 
-
 @login_required(login_url='/accounts/login/')
 def createbiz(request):
-	"""
-	Creates business class
-	"""
-	if Join.objects.filter(user_id = request.user).exists():
-		if request.method == 'POST':
-			form = CreateBizForm(request.POST)
-			if form.is_valid():
-				business = form.save(commit = False)
-				business.user = request.user
-				business.hood = request.user.join.hood_id
-				business.save()
-				messages.success(request, 'Success! You have created a business')
-				return redirect('allBusinesses')
-		else:
-			form = CreateBizForm()
-			return render(request, 'forms/biz.html',{"form":form})
-				
-	else:
-		messages.error(request, 'Error! Join a Neighbourhood to create a Business')
-      
-    
-    
-    
-   
+    """
+    Creates business class
+    """
+    if Join.objects.filter(user_id = request.user).exists():
+        if request.method == 'POST':
+            form = CreateBizForm(request.POST)
+            if form.is_valid():
+                business = form.save(commit = False)
+                business.user = request.user
+                business.hood = request.user.join.hood_id
+                business.save()
+                messages.success(request, 'Success! You have created a business')
+                return redirect('allBusinesses')
+        else:
+            form = CreateBizForm()
+            return render(request, 'forms/biz.html',{"form":form})
+    else:
+        messages.error(request, 'Error! Join a Neighbourhood to create a Business')
+
 
       
         
