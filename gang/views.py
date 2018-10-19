@@ -84,14 +84,14 @@ def edithood(request , id):
     """
     neighbour = Neighbour.objects.get(pk = id)
     if request.method == 'POST':
-        form = CreateHoodForm(request.POST, request.FILES)
+        form = CreateHoodForm(request.POST,instance = neighbour)
         if form.is_valid():
             hood = form.save(commit=False)
             hood.user = request.user
             hood.save()
         return redirect('landing')
     else:
-        form = CreateHoodForm()
+        form = CreateHoodForm(instance = neighbour)
     return render(request, 'edit/hood.html', locals())
 
         
