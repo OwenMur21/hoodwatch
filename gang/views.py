@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import SignupForm
+from .forms import SignupForm, CreateHoodForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -57,3 +57,25 @@ def index(request):
     Renders the index page
     """
     return render(request, 'index.html')
+
+
+@login_required(login_url='/accounts/login/')
+def createhood(request):
+    """
+    Renders the creating hood form
+    """
+    if request.method == 'POST':
+        form = CreateHoodForm(request.POST)
+        if form.is_valid():
+            hood = form.save(commit = False)
+            hood.user = request.user
+            hood.save()
+            return redirect('landing')
+    else:
+        form = CreateHoodForm()
+        return render(request, 'forms/hood.html', {"form":form})
+        
+
+
+
+
