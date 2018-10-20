@@ -1,8 +1,8 @@
-<nav class="navbar navbar-default navbar-fixed-top" style="background-color:whitesmoke; border-radius:1px;">
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#F4F7F6; border-radius:1px; color:whitesmoke;">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-    <a class="navbar-brand" href="/">  <span class="glyphicon glyphicon-home"></span> Hoodwatch</a>
+    <a class="navbar-brand" style="font-weight:bolder;" href="/">  <span class="glyphicon glyphicon-home"></span> Hoodwatch</a>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -14,12 +14,12 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" style="font-weight:bolder;">
             
-                 <li><a href="{%url 'createhood'%}"><span class="glyphicon glyphicon-plus"></span></a></li>
+                 <li><a href="{%url 'createhood'%}" style="font-weight:bolder; "><span class="glyphicon glyphicon-plus"> Create-hood</span></a></li>
                 <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">           <span class="glyphicon glyphicon-user"></span>
+        <a class="dropdown-toggle" style="font-weight:bolder; " data-toggle="dropdown" href="#">   {{user.username}}        <span class="glyphicon glyphicon-user"></span>
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">View Profile</a></li>
+          <li><a href="#" >View Profile</a></li>
           <li><a href="#">Edit Profile</a></li>
           <li><a href="#">Logout</a></li>
         </ul>
@@ -45,4 +45,5 @@
    font-family: 'Niramit', sans-serif;
    font-size: 18px;
  }
+
   </style>

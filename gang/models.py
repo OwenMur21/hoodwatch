@@ -28,7 +28,7 @@ class Neighbour(models.Model):
 
 
     def __str__(self):
-                return self.name
+        return self.name
 
     def save_hood(self):
         self.save()
@@ -38,8 +38,8 @@ class Neighbour(models.Model):
 
     @classmethod
     def get_by_id(cls, id):
-            hood = Neighbour.objects.get(id=id)
-            return hood
+        hood = Neighbour.objects.get(id=id)
+        return hood
 
     
 class Profile(models.Model):
@@ -72,8 +72,8 @@ class Profile(models.Model):
 
     @classmethod
     def get_user_by_hood(cls, id):
-            profile = Profile.objects.filter(hood_id=id).all()
-            return profile
+        profile = Profile.objects.filter(hood_id=id).all()
+        return profile
 
 
    
@@ -98,24 +98,28 @@ class Business(models.Model):
 
     @classmethod
     def get_by_bizid(cls, id):
-            biz = Business.objects.get(id=id)
-            return biz
+        biz = Business.objects.get(id=id)
+        return biz
             
     @classmethod
     def search_biz(cls, name):
-            biz = cls.objects.filter(name__icontains=name)
-            return biz
-
+        biz = cls.objects.filter(name__icontains=name)
+        return biz
 
 class Join(models.Model):
-	"""
-	Class that monitors users who join hoods
-	"""
-	user = models.OneToOneField(User)
-	hood = models.ForeignKey(Neighbour)
+    """
+    Class that contains monitors which users have joined which neighbourhoods
+    """
+    user = models.OneToOneField(User)
+    hood = models.ForeignKey(Neighbour)
 
-	def __str__(self):
-            return self.user
+    def __str__(self):
+        return self.user
+
+
+
+
+
   
 
 
