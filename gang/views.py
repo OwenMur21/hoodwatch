@@ -11,7 +11,7 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
-from .models import Neighbour, Profile, Join, Posts
+from .models import Neighbour, Profile, Join, Posts, Business
 
 def signup(request):
     if request.method == 'POST':
@@ -62,6 +62,7 @@ def index(request):
         hood = Neighbour.objects.get(pk = request.user.join.hood_id)
         occupants = Profile.get_user_by_hood(id= request.user.join.hood_id).all()
         posts = Posts.get_post_by_hood(id = request.user.join.hood_id)
+        biz = Business.get_biz_by_hood(id = request.user.join.hood_id)
         return render(request,'hood.html', locals())
 
     else:
@@ -131,21 +132,23 @@ def createbiz(request):
     """
     Creates business class
     """
-    if Join.objects.filter(user_id = request.user).exists():
-        if request.method == 'POST':
-            form = CreateBizForm(request.POST)
-            if form.is_valid():
-                business = form.save(commit = False)
-                business.user = request.user
-                business.hood = request.user.join.hood_id
-                business.save()
-                messages.success(request, 'Success! You have created a business')
-                return redirect('allBusinesses')
+    hoods = Neighbour.objects.all()
+    for hood in hoods:
+        if Join.objects.filter(user_id = request.user).exists():
+            if request.method == 'POST':
+                form = CreateBizForm(request.POST)
+                if form.is_valid():
+                    business = form.save(commit = False)
+                    business.user = request.user
+                    business.hood = hood
+                    business.save()
+                    messages.success(request, 'Success! You have created a business')
+                    return redirect('landing')
+            else:
+                form = CreateBizForm()
+                return render(request, 'forms/biz.html',{"form":form})
         else:
-            form = CreateBizForm()
-            return render(request, 'forms/biz.html',{"form":form})
-    else:
-        messages.error(request, 'Error! Join a Neighbourhood to create a Business')
+            messages.error(request, 'Error! Join a Neighbourhood to create a Business')
 
 
 @login_required(login_url='/accounts/login/')

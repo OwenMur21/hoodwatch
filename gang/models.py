@@ -102,6 +102,11 @@ class Business(models.Model):
     def get_by_bizid(cls, id):
         biz = Business.objects.get(id=id)
         return biz
+
+    @classmethod
+    def get_biz_by_hood(cls, id):
+        biz = Business.objects.filter(hood_id=id).all()
+        return biz
             
     @classmethod
     def search_biz(cls, name):
