@@ -65,7 +65,7 @@ def index(request):
 
     else:
         hoods = Neighbour.objects.all()
-    return (request, 'index.html', locals())
+        return render(request, 'index.html', locals())
 
 
 @login_required(login_url='/accounts/login/')
@@ -148,7 +148,7 @@ def createbiz(request):
 
 
 @login_required(login_url='/accounts/login/')
-def exithood(request):
+def exithood(request, id):
     """
     Allows users to exit hoods
     """
