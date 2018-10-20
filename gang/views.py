@@ -60,6 +60,7 @@ def index(request):
     """
     if Join.objects.filter(user_id = request.user).exists():
         hood = Neighbour.objects.get(pk = request.user.join.hood_id)
+        occupants = Profile.get_user_by_hood(id= request.user.join.hood_id).all()
         return render(request,'hood.html', locals())
 
     else:
@@ -144,6 +145,16 @@ def createbiz(request):
             return render(request, 'forms/biz.html',{"form":form})
     else:
         messages.error(request, 'Error! Join a Neighbourhood to create a Business')
+
+
+@login_required(login_url='/accounts/login/')
+def exithood(request):
+    """
+    Allows users to exit hoods
+    """
+    Join.objects.get(user_id = request.user).delete()
+    messages.error(request, "Neighbourhood exited")
+    return redirect('landing')
 
 
 

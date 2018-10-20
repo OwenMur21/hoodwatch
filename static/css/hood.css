@@ -12,17 +12,30 @@ body{
     color: black;
     border-radius: 10px;
     padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
 }
 .head{
     text-align: center;
     padding-top: 20px;
     font-size: 35px;
+    font-family: 'Alfa Slab One', cursive;
     
 }
 hr{
     border-color: black;
+   
 }
 
 .destitle{
-    font-size: 25px;
+    font-size: 30px;
+    font-family: 'Concert One', cursive;
 }
+.desc{
+    padding-left: 20px;
+    font-family: 'Overlock', cursive;
+    font-size: 18px;
+    padding-bottom: 20px;
+  
+}
+

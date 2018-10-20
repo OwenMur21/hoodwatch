@@ -23,6 +23,8 @@ class Neighbour(models.Model):
 )
     description = models.TextField(default="My hood is cool")
     location = models.CharField(max_length = 30, choices=loc)
+    police = models.CharField(max_length=15, default='0789563274')
+    health = models.CharField(max_length=15, default='0712549863')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 

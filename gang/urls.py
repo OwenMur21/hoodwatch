@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^createhood/$', views.createhood, name='createhood'),
     url(r'^edithood/(\d+)$', views.edithood, name='edithood'),
     url(r'^deletehood/(\d+)$',views.delhood, name = 'deletehood'),
-    url(r'^join/(\d+)',views.join, name = 'joinhood'),
+    url(r'^join/(\d+)$',views.join, name = 'joinhood'),
     url(r'^createbusiness/$', views.createbiz, name='createbiz'),
+    url(r'^exithood/(\d+)$', views.exithood, name='exithood'),
+    
 ]
