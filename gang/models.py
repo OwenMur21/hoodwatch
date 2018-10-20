@@ -118,6 +118,27 @@ class Join(models.Model):
     def __str__(self):
         return self.user
 
+class Posts(models.Model):
+    """
+    Class that defines Posts and their properties
+    """
+    body = models.TextField()
+    user = models.ForeignKey(User)
+    hood = models.ForeignKey(Neighbour)
+
+    def save_posts(self):
+        self.save()
+
+    def del_posts(self):
+        self.delete()
+
+    def __str__(self):
+        return self.body
+
+
+
+
+
 
 
 
