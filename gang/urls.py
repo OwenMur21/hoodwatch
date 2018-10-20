@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^join/(\d+)$',views.join, name = 'joinhood'),
     url(r'^createbusiness/$', views.createbiz, name='createbiz'),
     url(r'^exithood/(\d+)$', views.exithood, name='exithood'),
+    url(r'^createpost/$', views.createPost, name='createpost'),
     
 ]

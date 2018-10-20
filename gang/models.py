@@ -135,6 +135,12 @@ class Posts(models.Model):
     def __str__(self):
         return self.body
 
+    @classmethod
+    def get_post_by_hood(cls, id):
+        post = Posts.objects.filter(hood_id=id).all()
+        return post
+
+
 
 
 
