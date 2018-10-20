@@ -1,0 +1,20 @@
+{%extends 'base.html' %}
+{% load static%}
+
+
+{% block styles%}
+{{block.super}}
+<link rel="stylesheet" href="{% static 'css/hood.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid">
+<div class="header">
+<h2 class="head">Welcome {{hood.name}} resident</h2>
+<hr>
+<h4 class="destitle">Description</h4>
+<p class="desc">{{hood.description}}
+</div>
+</div>
+{% endblock%}
