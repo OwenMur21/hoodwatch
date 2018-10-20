@@ -58,7 +58,8 @@ def index(request):
     """
     Renders the index page
     """
-    return render(request, 'index.html')
+    hoods = Neighbour.objects.all()
+    return render(request, 'index.html', locals())
 
 
 @login_required(login_url='/accounts/login/')
@@ -105,15 +106,15 @@ def delhood(request , id):
     return redirect('landing')
 
 @login_required(login_url='/accounts/login/')
-def join(request , id):
+def join(request , hoodid):
     """
     This view edits neighbour class
     """
-    neighbour = Neighbour.objects.get(pk = id)
-    if Join.objects.filter(user_id = request.user).exists():
-        Join.objects.filter(user_id = request.user).update(hood_id = neighbour)
+    this_hood = Neighbour.objects.get(pk = hoodid)
+    if Join.objects.filter(user = request.user).exists():
+        Join.objects.filter(user_id = request.user).update(hood_id = this_hood.id)
     else:
-        Join(user_id=request.user,hood_id = neighbour).save()
+        Join(user=request.user, hood_id = this_hood.id).save()
     messages.success(request, 'Success! You have succesfully joined this Neighbourhood ')
     return redirect('landing')
 
@@ -140,9 +141,6 @@ def createbiz(request):
         messages.error(request, 'Error! Join a Neighbourhood to create a Business')
 
 
-      
-        
-  
 
 
         
