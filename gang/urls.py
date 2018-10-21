@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^exithood/(\d+)$', views.exithood, name='exithood'),
     url(r'^createpost/$', views.createPost, name='createpost'),
     url(r'^user/(\d+)$', views.profile, name='profile'),
+    url(r'search/', views.search_results, name='search_results'),
     
 ]

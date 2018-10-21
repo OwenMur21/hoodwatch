@@ -43,6 +43,12 @@ class Neighbour(models.Model):
         hood = Neighbour.objects.get(id=id)
         return hood
 
+    @classmethod
+    def search_by_title(cls,search_term):
+        hood = cls.objects.filter(name__icontains=search_term)
+        return hood
+
+
     
 class Profile(models.Model):
     """

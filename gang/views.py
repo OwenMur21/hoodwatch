@@ -196,6 +196,21 @@ def profile(request, user_id):
     users = User.objects.get(id=user_id)
     return render(request, 'profile.html', locals())
 
+@login_required(login_url='/accounts/login/')
+def search_results(request):
+
+    if 'hood' in request.GET and request.GET["hood"]:
+        search_term = request.GET.get("hood")
+        searched_hoods = Neighbour.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"hood": searched_hoods})
+
+    else:
+        message = "You haven't searched for any hood"
+        return render(request, 'search.html',{"message":message})
+
+
 
 
   
