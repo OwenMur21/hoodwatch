@@ -16,12 +16,14 @@
             
                  <li><a href="{%url 'createhood'%}" style="font-weight:bolder; "><span class="glyphicon glyphicon-plus"> Create-hood</span></a></li>
                 <li class="dropdown">
-        <a class="dropdown-toggle" style="font-weight:bolder; " data-toggle="dropdown" href="#">   {{user.username}}        <span class="glyphicon glyphicon-user"></span>
+        <a class="dropdown-toggle" style="font-weight:bolder; " data-toggle="dropdown" href="#"> {{user.username}} <span class="glyphicon glyphicon-user"></span>
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="#" >View Profile</a></li>
           <li><a href="#">Edit Profile</a></li>
-          <li><a href="#">Logout</a></li>
+          <li><a href="#">My Hoods</a></li>
+          <li><a href="#">My Businesses</a></li>
+          <li><a href="/logout">Logout</a></li>
         </ul>
       </li>
       </ul>
