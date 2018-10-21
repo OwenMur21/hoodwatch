@@ -184,6 +184,20 @@ def createPost(request):
             messages.error(request, 'Error! You can only create a post after Joining/Creating a neighbourhood')
 
 
+@login_required(login_url='/accounts/login/')
+def profile(request, user_id):
+    """
+    Function that enables one to see their profile
+    """
+    title = "Profile"
+    profile = Profile.objects.get(user_id=user_id)
+    biz = Business.objects.filter(user_id=user_id).all()
+    hood = Neighbour.objects.filter(user_id=user_id).all()
+    users = User.objects.get(id=user_id)
+    return render(request, 'profile.html', locals())
+
+
+
   
 
 

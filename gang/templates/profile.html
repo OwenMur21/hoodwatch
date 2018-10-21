@@ -1,0 +1,18 @@
+{%extends 'base.html' %}
+{% load static%}
+
+{% block styles%}
+{{block.super}}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<div class="header">
+<center>
+<h2 class="name">{{user.username}}</h2>
+</center>
+<p class="detz">Location: {{hood.name}}</p>
+</div>
+</div>
+{% endblock%}

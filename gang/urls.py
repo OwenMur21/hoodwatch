@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^createbusiness/$', views.createbiz, name='createbiz'),
     url(r'^exithood/(\d+)$', views.exithood, name='exithood'),
     url(r'^createpost/$', views.createPost, name='createpost'),
+    url(r'^user/(\d+)$', views.profile, name='profile'),
     
 ]
