@@ -20,9 +20,9 @@
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="/user/{{user.id}}" >View Profile</a></li>
-          <li><a href="#">Edit Profile</a></li>
-          <li><a href="#">My Hoods</a></li>
-          <li><a href="#">My Businesses</a></li>
+          {% if user.join %}
+           <li><a href="/exithood/{{user.join.hood_id}}" >Change neighbourhood</a></li>
+              {% endif %}
           <li><a href="/logout">Logout</a></li>
         </ul>
       </li>
