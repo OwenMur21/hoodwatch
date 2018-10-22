@@ -16,3 +16,6 @@ panel{
     float: right;
     font-size: 19px;
 }
+.btn-danger{
+    float: right;
+}
