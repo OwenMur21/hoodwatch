@@ -54,9 +54,8 @@ class Profile(models.Model):
     """
     Class that contains Profile details
     """
-    name = models.CharField(max_length = 30)
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    hood = models.ForeignKey(Neighbour, null=True)
+    hood = models.ForeignKey(Neighbour, null='True')
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
