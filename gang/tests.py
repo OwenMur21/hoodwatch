@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Neighbour, Profile, Business
+from .models import Neighbour, Profile, Business, Posts
 from django.contrib.auth.models import User
 
 
@@ -136,6 +136,45 @@ class BusinessTestClass(TestCase):
         biz = Business.objects.get(id=self.biz.id)
         self.assertTrue(this_biz, biz)
 
+
+
+class PostsTestClass(TestCase):
+    """
+    Test posts class and its functions
+    """
+    def setUp(self):
+        self.user = User.objects.create(id =1, username='a')
+        self.hood = Neighbour(name='mtaani', location='huko tu', user=self.user)
+        self.hood.save_hood()
+        self.post = Posts(body="bizna", user=self.user, hood=self.hood)
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.post, Posts))
+
+    
+    def test_save_method(self):
+        """
+        Function to test that a post is being saved
+        """
+        self.post.save_posts()
+        posts = Posts.objects.all()
+        self.assertTrue(len(posts) > 0)
+
+    def test_delete_method(self):
+        """
+        Function to test that a neighbourhood can be deleted
+        """
+        self.post.save_posts()
+        self.post.del_posts()
+
+    def test_update_method(self):
+        """
+        Function to test that a post's details can be updated
+        """
+        self.post.save_posts()
+        new_posts = Posts.objects.filter(body='bizna').update(body='biznas')
+        bizes = Posts.objects.get(body='biznas')
+        self.assertTrue(bizes.body, 'biznas')
 
         
  
