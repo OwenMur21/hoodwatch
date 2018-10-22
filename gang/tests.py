@@ -57,7 +57,7 @@ class ProfileTestClass(TestCase):
         self.user = User.objects.create(id =1,username='a')
         self.hood = Neighbour(name='mtaani', location='huko tu', user=self.user)
         self.hood.save_hood()
-        self.pro = Profile(name="Mimi", user=self.user, hood = self.hood)
+        self.pro = Profile(user=self.user, hood = self.hood)
 
     def test_instance(self):
         self.assertTrue(isinstance(self.pro, Profile))
@@ -78,14 +78,14 @@ class ProfileTestClass(TestCase):
         self.pro.save_profile()
         self.pro.del_profile()
 
-    def test_update_method(self):
-        """
-        Function to test that a profile's details can be updated
-        """
-        self.pro.save_profile()
-        new_profile = Profile.objects.filter(name='Mimi').update(name='Me')
-        profiles = Profile.objects.get(name='Me')
-        self.assertTrue(profiles.name, 'Me')
+    # def test_update_method(self):
+    #     """
+    #     Function to test that a profile's details can be updated
+    #     """
+    #     self.pro.save_profile()
+    #     new_profile = Profile.objects.filter(name='Mimi').update(name='Me')
+    #     profiles = Profile.objects.get(name='Me')
+    #     self.assertTrue(profiles.name, 'Me')
 
 
 class BusinessTestClass(TestCase):
